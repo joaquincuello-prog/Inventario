@@ -1,0 +1,1 @@
+HOLA!!! mi nombre es joaquin cuello, tengo 21 años y soy nuevo en el mundo de la programacion, hace dos años que estudio desarrollo en software pero solo en este año conocí este nuevo idioma "JS", aun no se bien de que va a tratar mi proyecto, pero eh practicado y solo me a salido hacer un mini inventario de stock.
