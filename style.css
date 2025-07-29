@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #eef1f5;
+  color: #333;
+}
+
+header {
+  background: #1565c0;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+main {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+input, button {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  grid-column: span 2;
+  background: #1565c0;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0d47a1;
+}
+
+#inventario div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.08);
+}
+
+.modificar, .eliminar {
+  margin-left: 10px;
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modificar {
+  background: #4caf50;
+}
+
+#mensaje {
+  font-weight: bold;
+  color: #388e3c;
+  margin-top: 10px;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #e0e0e0;
+  margin-top: 50px;
+}

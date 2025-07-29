@@ -1,96 +1,80 @@
-//alert()
+const formulario = document.getElementById("formulario");
+const nombre = document.getElementById("nombre");
+const categoria = document.getElementById("categoria");
+const cantidad = document.getElementById("cantidad");
+const precio = document.getElementById("precio");
+const inventario = document.getElementById("inventario");
+const mensaje = document.getElementById("mensaje");
 
-const inventario = [];
+let productos = JSON.parse(localStorage.getItem("inventario")) || [];
 
-//ingresar el producto
-function agregarProductos (){
-    let nombre = prompt("Ingrese el nombre del producto");
-    let cantidad = parseInt(prompt("Ingrese la cantidad"));
-    inventario.push({nombre, cantidad});
-    alert(`Producto agregado:\n${nombre} - Cantidad: ${cantidad}`);
+function guardarLocal() {
+  localStorage.setItem("inventario", JSON.stringify(productos));
 }
 
-//inventario
-function mostrarInventario(){
-    console.log ("inventario actual:");
-    inventario.forEach((item, index) =>{
-        console.log (`${index + 1}. ${item.nombre} - cantidad: ${item.cantidad}`);
-    });
+function renderInventario() {
+  inventario.innerHTML = "";
+  productos.forEach((p, i) => {
+    const div = document.createElement("div");
+    div.innerHTML = `
+      <span>
+        <strong>${p.nombre}</strong> | Categoría: ${p.categoria} | Cantidad: ${p.cantidad} | Precio: $${p.precio.toFixed(2)}
+      </span>
+      <div>
+        <button class="modificar" onclick="modificarProducto(${i})">Modificar</button>
+        <button class="eliminar" onclick="eliminarProducto(${i})">Eliminar</button>
+      </div>
+    `;
+    inventario.appendChild(div);
+  });
 }
 
-//modificar el producto
-function modificarProducto (){
-    let nombreBuscar = prompt ("ingrese el nombre del producto a modificar");
-    let encontrado = inventario.find(p => p.nombre  === nombreBuscar );
+formulario.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    if (encontrado) {
-        let nuevaCantidad = parseInt(prompt(`Cantidad actual: ${encontrado.cantidad}\nIngrese nueva cantidad:`));
-        encontrado.cantidad = nuevaCantidad;
-        alert(`cantidad actualizada para ${nombreBuscar}: ${nuevaCantidad}`);
-    } else {
-        alert("producto no encontrado.");
-    }
+  const nuevoProducto = {
+    nombre: nombre.value.trim(),
+    categoria: categoria.value.trim(),
+    cantidad: parseInt(cantidad.value),
+    precio: parseFloat(precio.value),
+  };
 
-}
-// eliminar el producto
-function eliminarProducto(){
-    let nombreEliminar = prompt("ingrese el nombre del producto a elminiar");
-    let index = inventario.findIndex(p => p.nombre === nombreEliminar);
+  if (!nuevoProducto.nombre || !nuevoProducto.categoria || isNaN(nuevoProducto.cantidad) || isNaN(nuevoProducto.precio)) {
+    mensaje.textContent = "Por favor complete todos los campos correctamente.";
+    return;
+  }
 
-    if (index  !== -1){
-        let confirmar= confirm('¿Estas seguro de que quieres eliminar el producto? "${nombreEliminar}"?')
-        if (confirmar){
-            inventario.splice(index, 1);
-            alert('Producto eliminado: ${nombreEliminar}');
-        }
-    } else{
-        alert('Producto no encontrado');
-    }
-}
+  productos.push(nuevoProducto);
+  guardarLocal();
+  renderInventario();
+  formulario.reset();
+  mensaje.textContent = `Producto "${nuevoProducto.nombre}" agregado correctamente.`;
+});
 
-// menu
-function menusimulador(){
-    let continuar = true;
+window.modificarProducto = function(index) {
+  const actual = productos[index];
+  const nuevaCantidad = parseInt(prompt(`Cantidad actual: ${actual.cantidad}\nIngrese nueva cantidad:`));
+  const nuevoPrecio = parseFloat(prompt(`Precio actual: $${actual.precio}\nIngrese nuevo precio:`));
 
-    while (continuar){
-        let opcion = prompt(
-            "seleccione una opcion: \n"+
-            "1. Agregar producto\n" +
-            "2. Mostrar inventario\n" +
-            "3. Modificar producto\n" +
-            "4. Eliminar producto\n" +
-            "5. Salir"
+  if (!isNaN(nuevaCantidad) && nuevaCantidad > 0 && !isNaN(nuevoPrecio) && nuevoPrecio >= 0) {
+    actual.cantidad = nuevaCantidad;
+    actual.precio = nuevoPrecio;
+    guardarLocal();
+    renderInventario();
+    mensaje.textContent = `Producto "${actual.nombre}" actualizado.`;
+  } else {
+    mensaje.textContent = "Datos inválidos.";
+  }
+};
 
-        );
+window.eliminarProducto = function(index) {
+  const nombre = productos[index].nombre;
+  if (confirm(`¿Seguro que desea eliminar "${nombre}"?`)) {
+    productos.splice(index, 1);
+    guardarLocal();
+    renderInventario();
+    mensaje.textContent = `Producto "${nombre}" eliminado.`;
+  }
+};
 
-        switch (opcion) {
-            case "1":
-                agregarProductos();
-                break;
-            case "2":
-                mostrarInventario();
-                break;
-            case "3":
-                modificarProducto();
-                break;
-            case "4":
-                eliminarProducto();
-                break;
-            case "5":
-                continuar = false;
-                alert("Simulador finalizado. Gracias por usarlo.");
-                break;
-            default:
-                alert("Opción inválida. Intente nuevamente.");
-            }
-
-        }
-}
-
-menusimulador();
-
-//la ejecucion de las funciones
-// agregarProductos();
-// mostrarInventario();
-// modificarProducto();
-// mostrarInventario();
+renderInventario();

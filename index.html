@@ -1,23 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventario de Stock</title>
-    <script defer src="./script.js"></script>
+  <meta charset="UTF-8">
+  <title>Gestión de Inventario</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./script.js"></script>
 </head>
-
 <body>
+  <header>
+    <h1>📦 Inventario Interactivo</h1>
+  </header>
 
-    <header>
-        <h1>primer prueba de Inventario</h1>
-    </header>
-    <main>
-    <h2>Gestion de Inventario</h2>
-    <p>Registre, consulte y modifique desde la consola </p>
+  <main>
+    <form id="formulario">
+      <input type="text" id="nombre" placeholder="Nombre del producto" required>
+      <input type="text" id="categoria" placeholder="Categoría" required>
+      <input type="number" id="cantidad" placeholder="Cantidad" min="1" required>
+      <input type="number" id="precio" placeholder="Precio unitario" step="0.01" min="0" required>
+      <button type="submit">Agregar producto</button>
+    </form>
 
-    </main>
+    <section id="inventario">
+      <!-- Productos renderizados dinámicamente -->
+    </section>
 
-    
+    <p id="mensaje"></p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Simulador creado por Joaquín</p>
+  </footer>
+
 </body>
 </html>
