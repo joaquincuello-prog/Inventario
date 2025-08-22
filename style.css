@@ -1,93 +1,120 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #eef1f5;
-  color: #333;
+  background: #f4f4f4;
 }
 
+/* Header */
 header {
-  background: #1565c0;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
-
-main {
-  max-width: 800px;
-  margin: 30px auto;
-  padding: 0 20px;
-}
-
-form {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin-bottom: 25px;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 6px rgba(0,0,0,0.1);
-}
-
-input, button {
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-button {
-  grid-column: span 2;
-  background: #1565c0;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #0d47a1;
-}
-
-#inventario div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
-  margin-bottom: 10px;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 0 4px rgba(0,0,0,0.08);
+  background: #333;
+  color: #fff;
+  padding: 15px 20px;
 }
 
-.modificar, .eliminar {
-  margin-left: 10px;
-  background: #f44336;
+header .brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand-logo {
+  background: #ff9800;
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 12px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+nav a {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.search input {
+  padding: 5px;
+  border-radius: 3px;
+  border: none;
+}
+
+/* Formulario */
+form {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+form input, form button {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button {
+  background: #28a745;
   color: white;
   border: none;
-  padding: 6px 10px;
-  border-radius: 5px;
   cursor: pointer;
 }
 
-.modificar {
-  background: #4caf50;
+form button:hover {
+  background: #218838;
 }
 
+/* Inventario */
+#inventario div {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+}
+
+#inventario button {
+  margin-left: 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#inventario .modificar {
+  background: #ffc107;
+  color: #333;
+}
+
+#inventario .eliminar {
+  background: #dc3545;
+  color: #fff;
+}
+
+/* Mensajes */
 #mensaje {
   font-weight: bold;
-  color: #388e3c;
   margin-top: 10px;
-  text-align: center;
+  padding: 8px;
+  border-radius: 5px;
+  display: inline-block;
 }
 
-footer {
-  text-align: center;
-  padding: 15px;
-  background: #e0e0e0;
-  margin-top: 50px;
+.mensaje-exito {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+.mensaje-error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
 }
